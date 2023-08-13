@@ -12,10 +12,12 @@ Let's start by creating a ``Task`` entity::
     namespace App\Entity;
 
     use Doctrine\Common\Collections\Collection;
+    use Symfony\Component\Validator\Constraints as Assert;
 
     class Task
     {
         protected string $description;
+        #[Assert\Valid()]
         protected Collection $tags;
 
         public function __construct()
@@ -43,6 +45,8 @@ Let's start by creating a ``Task`` entity::
 
     The `ArrayCollection`_ is specific to Doctrine and is similar to a PHP array
     but provides many utility methods.
+
+    The ``#[Assert\Valid()]`` annotation enables form validation for the collection objects.
 
 Now, create a ``Tag`` class. As you saw above, a ``Task`` can have many ``Tag``
 objects::
@@ -694,6 +698,9 @@ the relationship between the removed ``Tag`` and ``Task`` object.
     you'll need to do extra work to make sure that the relationship is properly
     updated (whether you're adding new tags or removing existing tags) on
     each Tag object itself.
+
+
+
 
 .. seealso::
 
